@@ -5,7 +5,7 @@ const DT = Sequelize.DataTypes;
 
 const CreditCard = sequelize.define("creditCard", {
   creditCard_ID: {
-    type: DT.INTEGER,
+    type: DT.UUID,
     allowNull: false,
     primaryKey: true,
   },
@@ -27,7 +27,7 @@ const CreditCard = sequelize.define("creditCard", {
   },
 });
 
-CreditCard.sync({alter:true})
+CreditCard.sync();
 
 
 module.exports = {

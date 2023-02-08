@@ -1,38 +1,34 @@
 const Sequelize = require("sequelize");
-const bcrypt = require("bcrypt");
 const sequelize = require("./config");
 const { Address } = require("./address");
-const { CreditCard } = require("./creditCard");
 
 const DT = Sequelize.DataTypes;
-const salt = 10;
 
-const User = sequelize.define(
-  "users",
+const Restaurant = sequelize.define(
+  "restaurants",
   {
-    user_id: {
+    restaurant_id: {
       type: DT.UUID,
       primaryKey: true,
       defaultValue: DT.UUIDV1,
     },
-    firstName: {
+    restaurant_email: {
       type: DT.STRING(50),
       allowNull: false,
     },
-    lastName: {
-      type: DT.STRING(50),
+    description: {
+      type: DT.STRING(100),
       allowNull: false,
     },
-    phoneNumber: {
-      type: DT.STRING(50),
+    opens_at: {
+      type: DT.TIME,
       allowNull: false,
     },
-    user_email: {
-      type: DT.STRING(50),
+    closes_at: {
+      type: DT.TIME,
       allowNull: false,
-      unique: true,
     },
-    password: {
+    cuisine_type: {
       type: DT.STRING(200),
       allowNull: false,
     },
@@ -43,30 +39,40 @@ const User = sequelize.define(
            key: 'address_id', // 'id' refers to column name in address table
         }
      },
-    user_gender: {
+    delivery_type: {
       type: DT.STRING(50),
       allowNull: false
     },
-    creditCard_ID: {
-        type: DT.UUID,
-        references: {
-           model: CreditCard, // 'paymentInfo' refers to table name
-           key: 'creditCard_ID', // 'id' refers to column name in paymentInfo table
-        }
+    phone_number: {
+        type: DT.INTEGER,
+        allowNull: false,
     },
+    delivery_fee :{
+        type:DT.INTEGER,
+        allowNull: false,
+
+    },
+    rating:{
+        type:DT.INTEGER,
+        allowNull: false,
+    },
+    password: {
+        type: DT.STRING(200),
+        allowNull: false,
+    }
   },
   {
     hooks: {
-      beforeCreate: (User) => {
-        User.password =
-          User.password !== "" ? bcrypt.hashSync(User.password, salt) : "";
+      beforeCreate: (Restaurant) => {
+        Restaurant.password =
+          Restaurant.password !== "" ? bcrypt.hashSync(Restaurant.password, salt) : "";
       },
     },
   }
 );
 
-User.sync();
+Restaurant.sync();
 
 module.exports = {
-  User,
+  Restaurant,
 };

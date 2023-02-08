@@ -7,10 +7,10 @@ const { CreditCard } = require("./creditCard");
 const DT = Sequelize.DataTypes;
 const salt = 10;
 
-const User = sequelize.define(
-  "users",
+const DeliveryPerson = sequelize.define(
+  "deliveryPerson",
   {
-    user_id: {
+    deliveryPerson_ID: {
       type: DT.UUID,
       primaryKey: true,
       defaultValue: DT.UUIDV1,
@@ -27,7 +27,7 @@ const User = sequelize.define(
       type: DT.STRING(50),
       allowNull: false,
     },
-    user_email: {
+    email: {
       type: DT.STRING(50),
       allowNull: false,
       unique: true,
@@ -37,18 +37,14 @@ const User = sequelize.define(
       allowNull: false,
     },
     address_id: {
-        type: DT.UUID,
+        type: DT.INTEGER,
         references: {
            model: Address, // 'address' refers to table name
            key: 'address_id', // 'id' refers to column name in address table
         }
      },
-    user_gender: {
-      type: DT.STRING(50),
-      allowNull: false
-    },
     creditCard_ID: {
-        type: DT.UUID,
+        type: DT.INTEGER,
         references: {
            model: CreditCard, // 'paymentInfo' refers to table name
            key: 'creditCard_ID', // 'id' refers to column name in paymentInfo table
@@ -57,16 +53,16 @@ const User = sequelize.define(
   },
   {
     hooks: {
-      beforeCreate: (User) => {
-        User.password =
-          User.password !== "" ? bcrypt.hashSync(User.password, salt) : "";
+      beforeCreate: (DeliveryPerson) => {
+        DeliveryPerson.password =
+          DeliveryPerson.password !== "" ? bcrypt.hashSync(DeliveryPerson.password, salt) : "";
       },
     },
   }
 );
 
-User.sync();
+DeliveryPerson.sync();
 
 module.exports = {
-  User,
+  DeliveryPerson,
 };

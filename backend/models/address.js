@@ -1,12 +1,11 @@
 const Sequelize = require("sequelize");
 const sequelize = require("./config");
-const { User } = require("./users");
 
 const DT = Sequelize.DataTypes;
 
 const Address = sequelize.define("address", {
   address_id: {
-    type: DT.INTEGER,
+    type: DT.UUID,
     allowNull: false,
     primaryKey: true,
   },
@@ -36,7 +35,7 @@ const Address = sequelize.define("address", {
   }
 })
 
-Address.sync({alter:true});
+Address.sync();
 
 module.exports = {
   Address,
