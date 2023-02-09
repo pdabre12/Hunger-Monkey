@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("./config");
+const sequelize = require("./configSequelize");
 const { Address } = require("./address");
 
 const DT = Sequelize.DataTypes;
@@ -15,6 +15,7 @@ const Restaurant = sequelize.define(
     restaurant_email: {
       type: DT.STRING(50),
       allowNull: false,
+      unique:true
     },
     description: {
       type: DT.STRING(100),

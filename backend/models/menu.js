@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("./config");
+const sequelize = require("./configSequelize");
 const { Restaurant } = require("./restaurants");
 
 const DT = Sequelize.DataTypes;

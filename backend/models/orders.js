@@ -1,13 +1,13 @@
 const Sequelize = require("sequelize");
 const { Address } = require("./address");
-const sequelize = require("./config");
+const sequelize = require("./configSequelize");
 const { DeliveryPerson } = require("./deliveryPerson");
 const { Restaurant } = require("./restaurants");
 const { User } = require("./users");
 
 const DT = Sequelize.DataTypes;
 
-const Menu = sequelize.define("menus", {
+const Orders = sequelize.define("orders", {
   order_id: {
     type: DT.UUID,
     allowNull: false,
@@ -50,6 +50,10 @@ const Menu = sequelize.define("menus", {
     type: DT.TIME,
     allowNull:false
   },
+  ordered_menu_items:{
+    type:DT.JSON,
+    allowNull:false
+  },
   delivery_address_id : {
         type: DT.UUID,
         references: {
@@ -59,8 +63,8 @@ const Menu = sequelize.define("menus", {
      }
 })
 
-Menu.sync();
+Orders.sync();
 
 module.exports = {
-  Menu,
+  Orders,
 };
