@@ -1,8 +1,5 @@
 const { users } = require("../models/users");
-const { DeliveryPerson } = require("../models/deliveryPerson");
-const { Restaurant } = require("../models/restaurants");
-const {Menu } = require("../models/menu");
-const {Orders} = require("../models/orders");
+
 
 const createUser = async (
   firstName,
@@ -19,14 +16,17 @@ const createUser = async (
 ) => {
   try {
     const userObject = await users.create({
-      user_id,
       firstName,
       lastName,
       phoneNumber,
       email,
       password,
-      address_id,
-
+      address,
+      city,
+      zip,
+      state,
+      country,
+      role,
     });
     return {
       statusCode: 201,

@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
-const sequelize = require("./config");
+const sequelize = require("./configSequelize");
 const { Address } = require("./address");
 const { CreditCard } = require("./creditCard");
 
@@ -37,14 +37,14 @@ const DeliveryPerson = sequelize.define(
       allowNull: false,
     },
     address_id: {
-        type: DT.INTEGER,
+        type: DT.UUID,
         references: {
            model: Address, // 'address' refers to table name
            key: 'address_id', // 'id' refers to column name in address table
         }
      },
     creditCard_ID: {
-        type: DT.INTEGER,
+        type: DT.UUID,
         references: {
            model: CreditCard, // 'paymentInfo' refers to table name
            key: 'creditCard_ID', // 'id' refers to column name in paymentInfo table

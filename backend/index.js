@@ -7,3 +7,4 @@ app.listen(port, () => {
 });
 
 app.use("/user", require("./routes/userRoutes"));
+app.use("/restaurants", require("./routes/restaurantRoutes"));

@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
-const sequelize = require("./config");
+const sequelize = require("./configSequelize");
 const { Address } = require("./address");
 const { CreditCard } = require("./creditCard");
 
