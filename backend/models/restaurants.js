@@ -7,15 +7,11 @@ const DT = Sequelize.DataTypes;
 const Restaurant = sequelize.define(
   "restaurants",
   {
-    restaurant_id: {
-      type: DT.UUID,
-      primaryKey: true,
-      defaultValue: DT.UUIDV1,
-    },
+    
     restaurant_email: {
       type: DT.STRING(50),
       allowNull: false,
-      unique:true
+      primaryKey: true,
     },
     description: {
       type: DT.STRING(100),
@@ -33,13 +29,7 @@ const Restaurant = sequelize.define(
       type: DT.STRING(200),
       allowNull: false,
     },
-    address_id: {
-        type: DT.UUID,
-        references: {
-           model: Address, // 'address' refers to table name
-           key: 'address_id', // 'id' refers to column name in address table
-        }
-     },
+  
     delivery_type: {
       type: DT.STRING(50),
       allowNull: false

@@ -1,18 +1,21 @@
 const Sequelize = require("sequelize");
 const sequelize = require("./configSequelize");
+const { User } = require("./users");
 
 const DT = Sequelize.DataTypes;
 
 const CreditCard = sequelize.define("creditCard", {
   creditCard_ID: {
-    type: DT.UUID,
+    type: DT.INTEGER,
     allowNull: false,
     primaryKey: true,
+    auto_increment:true
   },
-  user_id: {
-    type: DT.UUID,
-    allowNull:false
-},
+  email: {
+    type: DT.STRING(60),
+    allowNull:false // 'id' refers to column name in paymentInfo table
+    }
+,
   address_id: {
     type: DT.INTEGER,
     allowNull:false

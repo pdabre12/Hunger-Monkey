@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 const { Address } = require("./address");
 const sequelize = require("./configSequelize");
-const { DeliveryPerson } = require("./deliveryPerson");
 const { Restaurant } = require("./restaurants");
 const { User } = require("./users");
 
@@ -13,25 +12,25 @@ const Orders = sequelize.define("orders", {
     allowNull: false,
     primaryKey: true,
   },
-  restaurant_id: {
-        type: DT.UUID,
+  restaurant_email: {
+        type: DT.STRING(50),
         references: {
            model: Restaurant, // 'address' refers to table name
-           key: 'restaurant_id', // 'id' refers to column name in address table
+           key: 'restaurant_email', // 'id' refers to column name in address table
         }
 },
-  user_id: {
-    type: DT.UUID,
+  email: {
+    type: DT.STRING(60),
         references: {
            model: User, // 'address' refers to table name
-           key: 'user_id', // 'id' refers to column name in address table
+           key: 'user_email', // 'id' refers to column name in address table
         }
   },
-  deliveryPerson_ID: {
-    type: DT.UUID,
+  deliveryPerson_email: {
+    type: DT.STRING(60),
         references: {
-           model: DeliveryPerson, // 'address' refers to table name
-           key: 'deliveryPerson_ID', // 'id' refers to column name in address table
+           model: User, // 'address' refers to table name
+           key: 'user_email', // 'id' refers to column name in address table
         }
   },
   status: {
@@ -55,7 +54,7 @@ const Orders = sequelize.define("orders", {
     allowNull:false
   },
   delivery_address_id : {
-        type: DT.UUID,
+        type: DT.INTEGER,
         references: {
            model: Address, // 'address' refers to table name
            key: 'address_id', // 'id' refers to column name in address table

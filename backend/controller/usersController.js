@@ -1,33 +1,36 @@
-const { users } = require("../models/users");
-const { DeliveryPerson } = require("../models/deliveryPerson");
+const { User } = require("../models/users");
 const { Restaurant } = require("../models/restaurants");
 const {Menu } = require("../models/menu");
 const {Orders} = require("../models/orders");
 
 const createUser = async (
+  
   firstName,
   lastName,
   phoneNumber,
-  email,
+  user_email,
   password,
-  address,
-  city,
-  zip,
-  state,
-  country,
-  role
+  address_id,
+  user_gender,
+  creditCard_ID,
+  role,
+  
 ) => {
   try {
-    const userObject = await users.create({
-      user_id,
+    let userCredentials = {
       firstName,
       lastName,
       phoneNumber,
-      email,
+      user_email,
       password,
       address_id,
+      user_gender,
+      creditCard_ID,
+      role,
 
-    });
+    }
+    const userObject = await User.create(userCredentials);
+    
     return {
       statusCode: 201,
       body: userObject,
@@ -41,9 +44,9 @@ const createUser = async (
   }
 };
 
-const getUser = async (userID) => {
+const getUser = async (email) => {
   try {
-    const userObject = await users.findByPk(userID);
+    const userObject = await User.findByPk(email);
     if (userObject !== undefined && userObject !== null) {
       return {
         statusCode: 200,
@@ -64,10 +67,8 @@ const getUser = async (userID) => {
 
 const getUserByCreds = async (email) => {
   try {
-    const userObject = await users.findOne({
-      where: {
-        email,
-      },
+    const userObject = await User.findOne({
+      where: { user_email: email }
     });
     if (userObject !== undefined && userObject !== null) {
       return {
@@ -89,10 +90,10 @@ const getUserByCreds = async (email) => {
   }
 };
 
-const updateUser = async (userID, updateData) => {
+const updateUser = async (email, updateData) => {
   try {
-    const updateObject = await users.update(updateData, {
-      where: { user_id: userID },
+    const updateObject = await User.update(updateData, {
+      where: { user_email: email },
     });
     if (updateObject !== undefined && updateObject !== null) {
       return {

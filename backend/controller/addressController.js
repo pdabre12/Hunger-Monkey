@@ -1,7 +1,7 @@
-const { users } = require("../models/users");
+const { Address } = require("../models/address");
 
-const createUser = async (
-  firstName,
+const createAddress = async (
+  address_id,
   lastName,
   phoneNumber,
   email,

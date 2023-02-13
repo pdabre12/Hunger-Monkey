@@ -4,14 +4,14 @@ const sequelize = require("./configSequelize");
 const DT = Sequelize.DataTypes;
 
 const Address = sequelize.define("address", {
-  address_id: {
-    type: DT.UUID,
-    allowNull: false,
-    primaryKey: true,
-  },
-  user_id: {
-    type: DT.UUID,
-    allowNull:false
+  address_id:{
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+},
+  email: {
+      type: DT.STRING(50),
+      allowNull:false
 },
   street: {
     type: DT.STRING(100),

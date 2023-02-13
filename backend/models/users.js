@@ -10,11 +10,7 @@ const salt = 10;
 const User = sequelize.define(
   "users",
   {
-    user_id: {
-      type: DT.UUID,
-      primaryKey: true,
-      defaultValue: DT.UUIDV1,
-    },
+   
     firstName: {
       type: DT.STRING(50),
       allowNull: false,
@@ -31,29 +27,22 @@ const User = sequelize.define(
       type: DT.STRING(50),
       allowNull: false,
       unique: true,
+      primary_key:true
     },
     password: {
       type: DT.STRING(200),
       allowNull: false,
     },
-    address_id: {
-        type: DT.UUID,
-        references: {
-           model: Address, // 'address' refers to table name
-           key: 'address_id', // 'id' refers to column name in address table
-        }
-     },
+  
     user_gender: {
       type: DT.STRING(50),
       allowNull: false
     },
-    creditCard_ID: {
-        type: DT.UUID,
-        references: {
-           model: CreditCard, // 'paymentInfo' refers to table name
-           key: 'creditCard_ID', // 'id' refers to column name in paymentInfo table
-        }
-    },
+    
+    role:{
+      type:DT.STRING(20),
+      allowNull:true
+    }
   },
   {
     hooks: {

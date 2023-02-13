@@ -10,11 +10,11 @@ const Menu = sequelize.define("menus", {
     allowNull: false,
     primaryKey: true,
   },
-  restaurant_id: {
-        type: DT.UUID,
+  restaurant_email: {
+        type: DT.STRING(60),
         references: {
            model: Restaurant, // 'address' refers to table name
-           key: 'restaurant_id', // 'id' refers to column name in address table
+           key: 'restaurant_email', // 'id' refers to column name in address table
         }
 },
   description: {
