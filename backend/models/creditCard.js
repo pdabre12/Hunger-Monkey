@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize");
 const sequelize = require("./configSequelize");
-const { User } = require("./users");
 
 const DT = Sequelize.DataTypes;
 

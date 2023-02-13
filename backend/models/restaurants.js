@@ -11,7 +11,7 @@ const Restaurant = sequelize.define(
     restaurant_email: {
       type: DT.STRING(50),
       allowNull: false,
-      primaryKey: true,
+      primary_key:true
     },
     description: {
       type: DT.STRING(100),

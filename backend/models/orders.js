@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const { Address } = require("./address");
 const sequelize = require("./configSequelize");
+const { DeliveryPerson } = require("./deliveryPerson");
 const { Restaurant } = require("./restaurants");
 const { User } = require("./users");
 
