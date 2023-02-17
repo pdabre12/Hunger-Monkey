@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+
 const {
   createUser,
   getUser,
@@ -48,6 +49,7 @@ router.post("/api/auth/register", async (req, res) => {
         role,
       );
       if (createRes.statusCode === 201) {
+    
         res.status(201).send({
           user: {
             ...createRes.body.dataValues,
@@ -77,6 +79,7 @@ router.post("/api/auth/login", async (req, res) => {
   const { password } = userCreds;
   try {
     let userDetails = await getUserByCreds(email);
+    
     if (userDetails.statusCode === 200) {
       userDetails = userDetails.body.dataValues;
       bcrypt.compare(password, userDetails.password, (err, isMatch) => {
@@ -100,7 +103,6 @@ router.post("/api/auth/login", async (req, res) => {
             user: {
               ...userDetails,
             },
-            message:"Successfully logged in."
           });
         }
       });
