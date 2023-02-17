@@ -2,6 +2,7 @@ const { User } = require("../models/users");
 const { Restaurant } = require("../models/restaurants");
 const {Menu } = require("../models/menu");
 const {Orders} = require("../models/orders");
+const jwt = require("jsonwebtoken");
 
 const createUser = async (
   
@@ -30,6 +31,14 @@ const createUser = async (
 
     }
     const userObject = await User.create(userCredentials);
+    const token = jwt.sign(
+      { user_email },
+      `${process.env.TOKEN_KEY}`,
+      {
+        expiresIn: "2h",
+      }
+    );
+    userObject.dataValues.token = token
     
     return {
       statusCode: 201,
@@ -70,7 +79,16 @@ const getUserByCreds = async (email) => {
     const userObject = await User.findOne({
       where: { user_email: email }
     });
+    const token = jwt.sign(
+      { email },
+      `${process.env.TOKEN_KEY}`,
+      {
+        expiresIn: "2h",
+      }
+    );
+    
     if (userObject !== undefined && userObject !== null) {
+      userObject.dataValues.token = token
       return {
         statusCode: 200,
         body: userObject,
