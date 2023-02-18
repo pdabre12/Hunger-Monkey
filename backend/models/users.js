@@ -26,7 +26,6 @@ const User = sequelize.define(
     user_email: {
       type: DT.STRING(50),
       allowNull: false,
-      unique: true,
       primary_key:true
     },
     password: {

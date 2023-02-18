@@ -64,7 +64,7 @@ const getUser = async (email) => {
     }
     return {
       statusCode: 404,
-      body: "User Unauthorized",
+      body: "UserID Not present",
     };
   } catch (err) {
     return {
@@ -108,10 +108,10 @@ const getUserByCreds = async (email) => {
   }
 };
 
-const updateUser = async (email, updateData) => {
+const updateUser = async (userID, updateData) => {
   try {
     const updateObject = await User.update(updateData, {
-      where: { user_email: email },
+      where: { id: userID },
     });
     if (updateObject !== undefined && updateObject !== null) {
       return {
@@ -127,9 +127,56 @@ const updateUser = async (email, updateData) => {
   }
 };
 
+const getAllUsers = async() => {
+  try{
+    const usersObject = await User.findAll();
+    const usersArray = [];
+    // console.log(usersArray,usersObject[0].dataValues)
+    
+    usersObject.forEach(element => {
+      usersArray.push(element.dataValues)
+      
+    });
+    console.log(usersArray)
+    
+    if (usersArray !== undefined && usersArray !== null) {
+      return {
+        statusCode: 200,
+        body: usersArray,
+      };
+    }
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: err,
+    };
+  
+  }
+}
+
+// const deleteUser = async (userID) => {
+//   try {
+//     const updateObject = await User.delete(updateData, {
+//       where: { id: userID },
+//     });
+//     if (updateObject !== undefined && updateObject !== null) {
+//       return {
+//         statusCode: 200,
+//         body: updateObject,
+//       };
+//     }
+//   } catch (err) {
+//     return {
+//       statusCode: 500,
+//       body: err,
+//     };
+//   }
+// };
+
 module.exports = {
   createUser,
   getUser,
   updateUser,
   getUserByCreds,
+  getAllUsers
 };
