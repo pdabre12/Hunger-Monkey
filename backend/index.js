@@ -17,7 +17,8 @@ app.listen(port, () => {
   console.log(`Hunger Monkey listening on port ${port}!`);
 });
 
-app.use("/user",require("./routes/userRoutes"));
+app.use("/user",require("./routes/loginRoutes"));
+app.use("/profile",verifyToken, require("./routes/userRoutes"));
 app.use("/restaurants", require("./routes/restaurantRoutes"));
 app.get("/welcome", verifyToken, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
