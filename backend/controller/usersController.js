@@ -3,6 +3,8 @@ const { Restaurant } = require("../models/restaurants");
 const {Menu } = require("../models/menu");
 const {Orders} = require("../models/orders");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const salt = 10;
 
 const createUser = async (
   
@@ -110,8 +112,11 @@ const getUserByCreds = async (email) => {
 
 const updateUser = async (userID, updateData) => {
   try {
+    updateData.password = bcrypt.hashSync(updateData.password,salt);
+    console.log(updateData);
     const updateObject = await User.update(updateData, {
       where: { id: userID },
+      
     });
     if (updateObject !== undefined && updateObject !== null) {
       return {
