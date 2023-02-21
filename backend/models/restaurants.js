@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("./configSequelize");
-const { Address } = require("./address");
+const bcrypt = require("bcrypt");
+const salt = 10;
 
 const DT = Sequelize.DataTypes;
 
@@ -8,15 +9,15 @@ const Restaurant = sequelize.define(
   "restaurants",
   {
     
-    restaurant_email: {
-      type: DT.STRING(50),
-      allowNull: false,
-      primary_key:true
-    },
     description: {
       type: DT.STRING(100),
       allowNull: false,
     },
+    restaurant_email: {
+        type: DT.STRING(50),
+        allowNull: false,
+        primary_key:true
+      },
     opens_at: {
       type: DT.TIME,
       allowNull: false,
@@ -58,8 +59,7 @@ const Restaurant = sequelize.define(
         Restaurant.password =
           Restaurant.password !== "" ? bcrypt.hashSync(Restaurant.password, salt) : "";
       },
-    },
-  }
+    }}
 );
 
 Restaurant.sync();

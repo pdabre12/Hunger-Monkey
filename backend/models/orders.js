@@ -14,10 +14,7 @@ const Orders = sequelize.define("orders", {
   },
   restaurant_email: {
         type: DT.STRING(50),
-        references: {
-           model: Restaurant, // 'address' refers to table name
-           key: 'restaurant_email', // 'id' refers to column name in address table
-        }
+        allowNull:false
 },
   email: {
     type: DT.STRING(60),

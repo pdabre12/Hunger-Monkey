@@ -1,8 +1,6 @@
 const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
 const sequelize = require("./configSequelize");
-const { Address } = require("./address");
-const { CreditCard } = require("./creditCard");
 
 const DT = Sequelize.DataTypes;
 const salt = 10;

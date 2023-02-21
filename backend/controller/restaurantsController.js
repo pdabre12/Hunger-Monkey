@@ -1,39 +1,48 @@
-const { users } = require("../models/users");
+const { Restaurant } = require("../models/restaurants");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const salt = 10;
 
 
-const createUser = async (
-  firstName,
-  lastName,
-  phoneNumber,
-  email,
-  password,
-  address,
-  city,
-  zip,
-  state,
-  country,
-  role
+const createRestaurant = async (
+    restaurant_email,
+    description,
+    opens_at,
+    closes_at,
+    cuisine_type,
+    delivery_type,
+    phone_number,
+    delivery_fee,
+    rating,
+    password
 ) => {
   try {
-    const userObject = await users.create({
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-      address,
-      city,
-      zip,
-      state,
-      country,
-      role,
+    const restaurantObject = await Restaurant.create({
+        restaurant_email,
+        description,
+        opens_at,
+        closes_at,
+        cuisine_type,
+        delivery_type,
+        phone_number,
+        delivery_fee,
+        rating,
+        password
     });
+    const token = jwt.sign(
+        { restaurant_email },
+        `${process.env.TOKEN_KEY}`,
+        {
+          expiresIn: "2h",
+        }
+      );
+      restaurantObject.dataValues.token = token
     return {
       statusCode: 201,
-      body: userObject,
+      body: restaurantObject,
     };
   } catch (err) {
-    console.log("Error while creating user row: ", err);
+    console.log("Error while creating restaurant row: ", err);
     return {
       statusCode: 500,
       body: err,
@@ -41,18 +50,18 @@ const createUser = async (
   }
 };
 
-const getUser = async (userID) => {
+const getRestaurant = async (restaurantID) => {
   try {
-    const userObject = await users.findByPk(userID);
-    if (userObject !== undefined && userObject !== null) {
+    const restaurantObject = await Restaurant.findByPk(restaurantID);
+    if (restaurantObject !== undefined && restaurantObject !== null) {
       return {
         statusCode: 200,
-        body: userObject,
+        body: restaurantObject,
       };
     }
     return {
       statusCode: 404,
-      body: "User Unauthorized",
+      body: "Restaurant Not found",
     };
   } catch (err) {
     return {
@@ -62,17 +71,25 @@ const getUser = async (userID) => {
   }
 };
 
-const getUserByCreds = async (email) => {
+const getRestaurantByCreds = async (restaurant_email) => {
   try {
-    const userObject = await users.findOne({
+    const restaurantObject = await Restaurant.findOne({
       where: {
-        email,
+        restaurant_email,
       },
     });
-    if (userObject !== undefined && userObject !== null) {
+    const token = jwt.sign(
+        { restaurant_email },
+        `${process.env.TOKEN_KEY}`,
+        {
+          expiresIn: "2h",
+        }
+      );
+      restaurantObject.dataValues.token = token
+    if (restaurantObject !== undefined && restaurantObject !== null) {
       return {
         statusCode: 200,
-        body: userObject,
+        body: restaurantObject,
       };
     } else {
       return {
@@ -89,15 +106,17 @@ const getUserByCreds = async (email) => {
   }
 };
 
-const updateUser = async (userID, updateData) => {
+const updateRestaurant = async (id, updateData) => {
   try {
-    const updateObject = await users.update(updateData, {
-      where: { user_id: userID },
+    updateData.password = bcrypt.hashSync(updateData.password,salt);
+    console.log(updateData);
+    const restaurantObject = await Restaurant.update(updateData, {
+      where: { id },
     });
-    if (updateObject !== undefined && updateObject !== null) {
+    if (restaurantObject !== undefined && restaurantObject !== null) {
       return {
         statusCode: 200,
-        body: updateObject,
+        body: restaurantObject,
       };
     }
   } catch (err) {
@@ -108,9 +127,35 @@ const updateUser = async (userID, updateData) => {
   }
 };
 
+const getAllRestaurants = async() => {
+    try{
+      const restaurantsObject = await Restaurant.findAll();
+      const restaurantsArray = [];
+      
+      restaurantsObject.forEach(element => {
+        restaurantsArray.push(element.dataValues)
+        
+      });
+      
+      if (restaurantsArray !== undefined && restaurantsArray !== null) {
+        return {
+          statusCode: 200,
+          body: restaurantsArray,
+        };
+      }
+    } catch (err) {
+      return {
+        statusCode: 500,
+        body: err,
+      };
+    
+    }
+  }
+
 module.exports = {
-  createUser,
-  getUser,
-  updateUser,
-  getUserByCreds,
+  createRestaurant,
+  getRestaurant,
+  updateRestaurant,
+  getRestaurantByCreds,
+  getAllRestaurants
 };
