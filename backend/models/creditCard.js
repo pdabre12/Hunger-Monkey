@@ -5,10 +5,9 @@ const DT = Sequelize.DataTypes;
 
 const CreditCard = sequelize.define("creditCard", {
   creditCard_ID: {
-    type: DT.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    auto_increment:true
+    type:Sequelize.INTEGER,
+    autoIncrement:true,
+    primaryKey: true,    
   },
   email: {
     type: DT.STRING(60),

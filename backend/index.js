@@ -21,3 +21,5 @@ app.use("/user",require("./routes/userLoginRoutes"));
 app.use("/profile",verifyToken, require("./routes/userRoutes"));
 app.use("/restaurants",require("./routes/restaurantLoginRoutes"));
 app.use("/restaurants",verifyToken,require("./routes/restaurantRoutes"));
+app.use("/addresses",verifyToken,require("./routes/addressRoutes"));
+app.use("/credit-cards",verifyToken,require("./routes/creditCardRoutes"))

@@ -1,38 +1,29 @@
 const { Address } = require("../models/address");
 
 const createAddress = async (
-  address_id,
-  lastName,
-  phoneNumber,
+ 
   email,
-  password,
-  address,
+  street,
   city,
-  zip,
   state,
   country,
-  role
+  pincode
 ) => {
   try {
-    const userObject = await users.create({
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-      address,
-      city,
-      zip,
-      state,
-      country,
-      role,
+    const addressObject = await Address.create({
+        email,
+        street,
+        city,
+        state,
+        country,
+        pincode
     });
     return {
       statusCode: 201,
-      body: userObject,
+      body: addressObject,
     };
   } catch (err) {
-    console.log("Error while creating user row: ", err);
+    console.log("Error while creating address row: ", err);
     return {
       statusCode: 500,
       body: err,
@@ -40,18 +31,18 @@ const createAddress = async (
   }
 };
 
-const getUser = async (userID) => {
+const getAddress = async (addressID) => {
   try {
-    const userObject = await users.findByPk(userID);
-    if (userObject !== undefined && userObject !== null) {
+    const addressObject = await Address.findByPk(addressID);
+    if (addressObject !== undefined && addressObject !== null) {
       return {
         statusCode: 200,
-        body: userObject,
+        body: addressObject,
       };
     }
     return {
       statusCode: 404,
-      body: "User Unauthorized",
+      body: "Address Not found",
     };
   } catch (err) {
     return {
@@ -61,22 +52,22 @@ const getUser = async (userID) => {
   }
 };
 
-const getUserByCreds = async (email) => {
+const getAllAddressByCreds = async (email) => {
   try {
-    const userObject = await users.findOne({
+    const addressObject = await Address.findAll({
       where: {
         email,
       },
     });
-    if (userObject !== undefined && userObject !== null) {
+    if (addressObject !== undefined && addressObject !== null && addressObject.length>0) {
       return {
         statusCode: 200,
-        body: userObject,
+        body: addressObject,
       };
     } else {
       return {
         statusCode: 404,
-        body: "You are not registered. Please create an account.",
+        body: "You do not have any addresses created.Please create an address.",
       };
     }
   } catch (err) {
@@ -88,10 +79,10 @@ const getUserByCreds = async (email) => {
   }
 };
 
-const updateUser = async (userID, updateData) => {
+const updateAddress = async (addressID, updateData) => {
   try {
-    const updateObject = await users.update(updateData, {
-      where: { user_id: userID },
+    const updateObject = await Address.update(updateData, {
+      where: { address_id: addressID },
     });
     if (updateObject !== undefined && updateObject !== null) {
       return {
@@ -108,8 +99,8 @@ const updateUser = async (userID, updateData) => {
 };
 
 module.exports = {
-  createUser,
-  getUser,
-  updateUser,
-  getUserByCreds,
+  createAddress,
+  getAddress,
+  getAllAddressByCreds,
+  updateAddress,
 };
