@@ -6,9 +6,10 @@ const DT = Sequelize.DataTypes;
 
 const Menu = sequelize.define("menus", {
   menu_id: {
-    type: DT.UUID,
+    type: DT.INTEGER,
     allowNull: false,
     primaryKey: true,
+    autoIncrement:true,
   },
   restaurant_email: {
         type: DT.STRING(60),
@@ -30,6 +31,10 @@ const Menu = sequelize.define("menus", {
     type: DT.BOOLEAN,
     allowNull:false
   },
+  cuisine:{
+    type:DT.STRING(50),
+    allowNull:false
+  }
  
 })
 
