@@ -156,7 +156,7 @@ router.get("/:menu_id", async (req, res) => {
             }
             else{
                 res.status(deletedObject.statusCode).send({
-                    message:deletedObject.body
+                    message:deletedObject.message
                 })
             }
             

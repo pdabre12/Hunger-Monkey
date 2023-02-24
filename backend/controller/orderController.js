@@ -6,28 +6,34 @@ const createOrder = async (
   
   restaurant_email,
   email,
+  deliveryPerson_email,
   status,
   price,
-  availability,
-  cuisine
+  placed_order_time,
+  order_delivered_time,
+  ordered_menu_items,
+  delivery_address_id
   
 ) => {
   try {
     const orderObject = await Orders.create({
-        restaurant_email,
-        description,
-        rating,
-        price,
-        availability,
-        cuisine
+      restaurant_email,
+      email,
+      deliveryPerson_email,
+      status,
+      price,
+      placed_order_time,
+      order_delivered_time,
+      ordered_menu_items,
+      delivery_address_id
         
     });
     return {
       statusCode: 201,
-      body: menuObject,
+      body: orderObject,
     };
   } catch (err) {
-    console.log("Error while creating menu row: ", err);
+    console.log("Error while creating order row: ", err);
     return {
       statusCode: 500,
       body: err,
@@ -35,18 +41,18 @@ const createOrder = async (
   }
 };
 
-const getMenu = async (menu_id) => {
+const getOrder = async (order_id) => {
   try {
-    const menuObject = await Menu.findByPk(menu_id);
-    if (menuObject !== undefined && menuObject !== null) {
+    const orderObject = await Orders.findByPk(order_id);
+    if (orderObject !== undefined && orderObject !== null) {
       return {
         statusCode: 200,
-        body: menuObject,
+        body: orderObject,
       };
     }
     return {
       statusCode: 404,
-      body: "Menu Not found",
+      body: "Order Not found",
     };
   } catch (err) {
     return {
@@ -56,22 +62,22 @@ const getMenu = async (menu_id) => {
   }
 };
 
-const getAllMenusByCreds = async (restaurant_email) => {
+const getAllOrdersByCredsRestaurant = async (restaurant_email) => {
   try {
-    const menuObject = await Menu.findAll({
+    const orderObject = await Orders.findAll({
       where: {
         restaurant_email,
       },
     });
-    if (menuObject !== undefined && menuObject !== null && menuObject.length>0) {
+    if (orderObject !== undefined && orderObject !== null && orderObject.length>0) {
       return {
         statusCode: 200,
-        body: menuObject,
+        body: orderObject,
       };
     } else {
       return {
         statusCode: 404,
-        body: "You do not have any menus available.Please add a menu.",
+        body: "You do not have any orders available.Please add an order.",
       };
     }
   } catch (err) {
@@ -83,10 +89,64 @@ const getAllMenusByCreds = async (restaurant_email) => {
   }
 };
 
-const updateMenu = async (menu_id, updateData) => {
+const getAllOrdersByCredsUser = async (email) => {
   try {
-    const updateObject = await Menu.update(updateData, {
-      where: { menu_id, },
+    const orderObject = await Orders.findAll({
+      where: {
+        email,
+      },
+    });
+    if (orderObject !== undefined && orderObject !== null && orderObject.length>0) {
+      return {
+        statusCode: 200,
+        body: orderObject,
+      };
+    } else {
+      return {
+        statusCode: 404,
+        body: "You do not have any orders available.Please add an order.",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: 500,
+      body: err,
+    };
+  }
+};
+
+const getAllOrdersByCredsDeliveryPerson = async (deliveryPerson_email) => {
+  try {
+    const orderObject = await Orders.findAll({
+      where: {
+        deliveryPerson_email,
+      },
+    });
+    if (orderObject !== undefined && orderObject !== null && orderObject.length>0) {
+      return {
+        statusCode: 200,
+        body: orderObject,
+      };
+    } else {
+      return {
+        statusCode: 404,
+        body: "You do not have any orders available.Please add an order.",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: 500,
+      body: err,
+    };
+  }
+};
+
+const updateOrder = async (order_id, updateData) => {
+  try {
+    const updateObject = await Orders.update(updateData, {
+      where: { order_id, },
     });
     if (updateObject !== undefined && updateObject !== null) {
       return {
@@ -102,16 +162,24 @@ const updateMenu = async (menu_id, updateData) => {
   }
 };
 
-const deleteMenu = async(menu_id) =>{
+const deleteOrder = async(order_id) =>{
     try{
-        const deletedObject = await Menu.destroy({
-            where:{menu_id,}
+        const deletedObject = await Orders.destroy({
+            where:{order_id,}
         })
-        if(deletedObject!==undefined && deletedObject!==null){
+        console.log(deletedObject)
+        if(deletedObject!==undefined && deletedObject!==null && deletedObject!==0){
             return {
                 statusCode:200,
-                message:"Menu Item deleted successfully"
+                message:"Order deleted successfully"
             };
+        }
+        else if (deletedObject===0){
+          return {
+            statusCode:404,
+            message:"Unable to delete order item.Order not found."
+          }
+
         }
     }
     catch(err){
@@ -124,9 +192,11 @@ const deleteMenu = async(menu_id) =>{
 }
 
 module.exports = {
-  createMenu,
-  getMenu,
-  getAllMenusByCreds,
-  updateMenu,
-  deleteMenu
+  createOrder,
+  getAllOrdersByCredsDeliveryPerson,
+  getAllOrdersByCredsRestaurant,
+  getAllOrdersByCredsUser,
+  updateOrder,
+  deleteOrder,
+  getOrder
 };

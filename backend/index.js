@@ -24,3 +24,5 @@ app.use("/restaurants",verifyToken,require("./routes/restaurantRoutes"));
 app.use("/addresses",verifyToken,require("./routes/addressRoutes"));
 app.use("/credit-cards",verifyToken,require("./routes/creditCardRoutes"))
 app.use("/menus",verifyToken,require("./routes/menuRoutes"));
+app.use("/orders",verifyToken,require("./routes/orderRoutes"));
+
