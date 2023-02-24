@@ -115,6 +115,13 @@ const deleteMenu = async(menu_id) =>{
                 message:"Menu Item deleted successfully"
             };
         }
+        else if (deletedObject===0){
+          return {
+            statusCode:404,
+            message:"Unable to delete menu item.Menu not found."
+          }
+
+        }
     }
     catch(err){
         return {

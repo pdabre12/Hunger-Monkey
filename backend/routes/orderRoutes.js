@@ -1,35 +1,41 @@
 const express = require("express");
-const { getAllMenusByCreds,getMenu, createMenu,
-deleteMenu,updateMenu } = require("../controller/menuController");
+const { getAllOrdersByCredsDeliveryPerson,getAllOrdersByCredsRestaurant, getAllOrdersByCredsUser,
+getOrder,updateOrder,deleteOrder, createOrder } = require("../controller/orderController");
 const router = express.Router();
 
 
 
 router.post("/create", async (req, res) => {
-    const menuDetails = req.body;
+    const orderDetails = req.body;
     const {
          
-  restaurant_email,
-  description,
-  rating,
-  price,
-  availability,
-  cuisine
-    } = menuDetails;
+      restaurant_email,
+      email,
+      deliveryPerson_email,
+      status,
+      price,
+      placed_order_time,
+      order_delivered_time,
+      ordered_menu_items,
+      delivery_address_id
+    } = orderDetails;
     try {
-  const createRes = await createMenu(
+  const createRes = await createOrder(
         
     restaurant_email,
-    description,
-    rating,
-    price,
-    availability
-    ,cuisine
+  email,
+  deliveryPerson_email,
+  status,
+  price,
+  placed_order_time,
+  order_delivered_time,
+  ordered_menu_items,
+  delivery_address_id
         );
         if (createRes.statusCode === 201) {
       
           res.status(201).send({
-            menu: {
+            order: {
               ...createRes.body.dataValues,
             },
           });
@@ -42,7 +48,7 @@ router.post("/create", async (req, res) => {
         }
       
     } catch (err) {
-      console.log("Error encountered while creating menu: ", err);
+      console.log("Error encountered while creating order: ", err);
       res.status(500).send({
         errors: {
           message: "Internal Server Error",
@@ -51,33 +57,33 @@ router.post("/create", async (req, res) => {
     }
   });
 
-router.get("/:menu_id", async (req, res) => {
-    const id = req.params.menu_id;
+router.get("/:order_id", async (req, res) => {
+    const id = req.params.order_id;
     console.log(id)
     try {
-      const menuDetails = await getMenu(id);
-      if (menuDetails.statusCode === 200) {
+      const orderDetails = await getOrder(id);
+      if (orderDetails.statusCode === 200) {
         res.status(200).send({
           data: {
-            ...menuDetails.body.dataValues,
+            ...orderDetails.body.dataValues,
           },
           
         });
-      } else if (menuDetails.statusCode === 404) {
+      } else if (orderDetails.statusCode === 404) {
         res.status(404).send({
           errors: {
-            message: menuDetails.body,
+            message: orderDetails.body,
           },
         });
       } else {
         res.status(500).send({
           errors: {
-            message: menuDetails.body,
+            message: orderDetails.body,
           },
         });
       }
     } catch (err) {
-      console.log("Error encountered while getting the menu details : ", err);
+      console.log("Error encountered while getting the order details : ", err);
       res.status(500).send({
         errors: {
           message: "Internal Server Error",
@@ -86,25 +92,25 @@ router.get("/:menu_id", async (req, res) => {
     }
   });
   
-  router.put("/:menu_id", async (req, res) => {
+  router.put("/:order_id", async (req, res) => {
     const updateData = req.body;
-    const menu_ID = req.params.menu_id;
+    const order_ID = req.params.order_id;
     try {
-      const updateRes = await updateMenu(menu_ID, updateData);
-      const menuObject = await getMenu(menu_ID) 
-      if (updateRes.statusCode === 200 && menuObject.statusCode === 200) {
+      const updateRes = await updateOrder(order_ID, updateData);
+      const orderObject = await getOrder(order_ID) 
+      if (updateRes.statusCode === 200 && orderObject.statusCode === 200) {
 
         res.status(200).send({
-            menu:{
-                ...menuObject.body.dataValues
+            order:{
+                ...orderObject.body.dataValues
             },
             
-            message:"Menu updated successfully!"
+            message:"Order updated successfully!"
 
       }) 
     }
       else {
-        console.log("Error encountered while updating Menu: ", updateRes.body);
+        console.log("Error encountered while updating Order: ", updateRes.body);
         res.status(500).send({
           errors: {
             message: "Internal Server Error",
@@ -122,21 +128,21 @@ router.get("/:menu_id", async (req, res) => {
   });
 
 
-  router.get("/all-menus/:restaurant_email", async (req, res) => {
+  router.get("/all-orders/restaurants/:restaurant_email", async (req, res) => {
 
         try {
-          const menus = await getAllMenusByCreds(req.params.restaurant_email);
-          if (menus.statusCode === 200) {
+          const orders = await getAllOrdersByCredsRestaurant(req.params.restaurant_email);
+          if (orders.statusCode === 200) {
             res.status(200).send({
-                menus: menus.body,
+                orders: orders.body,
             });
           } else {
-            res.status(menus.statusCode).send({
-              message: menus.body,
+            res.status(orders.statusCode).send({
+              message: orders.body,
             });
           }
         } catch (err) {
-          console.log("Error encountered while searching menus: ", err);
+          console.log("Error encountered while searching orders: ", err);
           res.status(500).send({
             errors: {
               message: "Internal Server Error",
@@ -145,23 +151,68 @@ router.get("/:menu_id", async (req, res) => {
         }
       });
 
-    router.delete("/:menu_id",async (req,res) =>{
+      router.get("/all-orders/users/:email", async (req, res) => {
+
         try {
-            const deletedObject = await deleteMenu(req.params.menu_id);
+          const orders = await getAllOrdersByCredsUser(req.params.email);
+          if (orders.statusCode === 200) {
+            res.status(200).send({
+                orders: orders.body,
+            });
+          } else {
+            res.status(orders.statusCode).send({
+              message: orders.body,
+            });
+          }
+        } catch (err) {
+          console.log("Error encountered while searching orders: ", err);
+          res.status(500).send({
+            errors: {
+              message: "Internal Server Error",
+            },
+          });
+        }
+      });
+
+      router.get("/all-orders/deliveryperson/:deliveryPerson_email", async (req, res) => {
+
+        try {
+          const orders = await getAllOrdersByCredsDeliveryPerson(req.params.deliveryPerson_email);
+          if (orders.statusCode === 200) {
+            res.status(200).send({
+                orders: orders.body,
+            });
+          } else {
+            res.status(orders.statusCode).send({
+              message: orders.body,
+            });
+          }
+        } catch (err) {
+          console.log("Error encountered while searching orders: ", err);
+          res.status(500).send({
+            errors: {
+              message: "Internal Server Error",
+            },
+          });
+        }
+      });
+    router.delete("/:order_id",async (req,res) =>{
+        try {
+            const deletedObject = await deleteOrder(req.params.order_id);
             console.log(deletedObject)
             if (deletedObject.statusCode === 200){
                 res.status(200).send({
-                    message:"Menu Object deleted successfully"
+                    message:"Order Object deleted successfully"
                 })
             }
             else{
                 res.status(deletedObject.statusCode).send({
-                    message:deletedObject.body
+                    message:deletedObject.message
                 })
             }
             
         } catch (err) {
-            console.log("Unable to delete menu item.",err)
+            console.log("Unable to delete order item.",err)
             res.status(500).send({
                 errors:{
                     message:"Internal server error"

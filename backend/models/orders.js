@@ -19,20 +19,14 @@ const Orders = sequelize.define("orders", {
 },
   email: {
     type: DT.STRING(60),
-        references: {
-           model: User, // 'address' refers to table name
-           key: 'user_email', // 'id' refers to column name in address table
-        }
+        allowNull:false
   },
   deliveryPerson_email: {
-    type: DT.STRING(60),
-        references: {
-           model: User, // 'address' refers to table name
-           key: 'user_email', // 'id' refers to column name in address table
-        }
+    type: DT.STRING(50),
+        allowNull:false
   },
   status: {
-    type: DT.STRING(10),
+    type: DT.STRING(50),
     allowNull: false,
   },
   price: {
@@ -53,10 +47,8 @@ const Orders = sequelize.define("orders", {
   },
   delivery_address_id : {
         type: DT.INTEGER,
-        references: {
-           model: Address, // 'address' refers to table name
-           key: 'address_id', // 'id' refers to column name in address table
-        }
+        allowNull:false
+      
      }
 })
 
