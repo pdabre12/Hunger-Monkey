@@ -17,9 +17,7 @@ router.post("/api/auth/register", async (req, res) => {
   phoneNumber,
   user_email,
   password,
-  address_id,
   user_gender,
-  creditCard_ID,
   role,
   } = userDetails;
   try {
@@ -43,9 +41,7 @@ router.post("/api/auth/register", async (req, res) => {
         phoneNumber,
         user_email,
         password,
-        address_id,
         user_gender,
-        creditCard_ID,
         role,
       );
       if (createRes.statusCode === 201) {
@@ -97,7 +93,7 @@ router.post("/api/auth/login", async (req, res) => {
             },
           });
         } else {
-          console.log("Successfully logged in");
+          console.log("Successfully logged user in");
           delete userDetails.password;
           res.status(200).send({
             user: {

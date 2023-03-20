@@ -1,7 +1,6 @@
 
 const {Menu} = require("../models/menu");
-const sequelize = require("sequelize");
-const { QueryTypes } = require('sequelize');
+
 
 const createMenu = async (
  

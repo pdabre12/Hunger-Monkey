@@ -5,29 +5,36 @@ const salt = 10;
 
 
 const createRestaurant = async (
-    restaurant_email,
+  restaurant_name,
+  restaurant_email,
+  address_id,
+  type_of_dishes,
+  delivery_type,
+description,
+opens_at,
+closes_at,
+cuisine_type,
+phone_number,
+delivery_fee,
+rating,
+password
+) => {
+  try {
+    console.log(restaurant_name)
+    const restaurantObject = await Restaurant.create({
+      restaurant_name,
+      restaurant_email,
+      address_id,
+      type_of_dishes,
+      delivery_type,
     description,
     opens_at,
     closes_at,
     cuisine_type,
-    delivery_type,
     phone_number,
     delivery_fee,
     rating,
     password
-) => {
-  try {
-    const restaurantObject = await Restaurant.create({
-        restaurant_email,
-        description,
-        opens_at,
-        closes_at,
-        cuisine_type,
-        delivery_type,
-        phone_number,
-        delivery_fee,
-        rating,
-        password
     });
     const token = jwt.sign(
         { restaurant_email },

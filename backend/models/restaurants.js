@@ -8,7 +8,10 @@ const DT = Sequelize.DataTypes;
 const Restaurant = sequelize.define(
   "restaurants",
   {
-    
+    restaurant_name:{
+      type:DT.STRING(60),
+      allowNull:false
+    },
     description: {
       type: DT.STRING(100),
       allowNull: false,
@@ -44,13 +47,21 @@ const Restaurant = sequelize.define(
         allowNull: false,
 
     },
-    rating:{
-        type:DT.INTEGER,
-        allowNull: false,
-    },
+    address_id:{
+      type: Sequelize.INTEGER,
+  },
     password: {
         type: DT.STRING(200),
         allowNull: false,
+    },
+    type_of_dishes:{
+      type:DT.STRING(50),
+      allowNull:false
+    },
+    rating:{
+      type:DT.INTEGER,
+      allowNull:true
+      
     }
   },
   {
