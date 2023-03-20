@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 8000;
 const cors = require('cors');
 const verifyToken = require("./middleware/auth");
  
@@ -18,11 +18,11 @@ app.listen(port, () => {
 });
 
 app.use("/user",require("./routes/userLoginRoutes"));
-app.use("/profile",verifyToken, require("./routes/userRoutes"));
+app.use("/profile", require("./routes/userRoutes"));
 app.use("/restaurants",require("./routes/restaurantLoginRoutes"));
-app.use("/restaurants",verifyToken,require("./routes/restaurantRoutes"));
-app.use("/addresses",verifyToken,require("./routes/addressRoutes"));
-app.use("/credit-cards",verifyToken,require("./routes/creditCardRoutes"))
-app.use("/menus",verifyToken,require("./routes/menuRoutes"));
-app.use("/orders",verifyToken,require("./routes/orderRoutes"));
+app.use("/restaurants",require("./routes/restaurantRoutes"));
+app.use("/addresses",require("./routes/addressRoutes"));
+app.use("/credit-cards",require("./routes/creditCardRoutes"))
+app.use("/menus",require("./routes/menuRoutes"));
+app.use("/orders",require("./routes/orderRoutes"));
 

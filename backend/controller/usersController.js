@@ -13,9 +13,7 @@ const createUser = async (
   phoneNumber,
   user_email,
   password,
-  address_id,
   user_gender,
-  creditCard_ID,
   role,
   
 ) => {
@@ -26,9 +24,7 @@ const createUser = async (
       phoneNumber,
       user_email,
       password,
-      address_id,
       user_gender,
-      creditCard_ID,
       role,
 
     }

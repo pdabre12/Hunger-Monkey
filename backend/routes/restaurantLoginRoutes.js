@@ -11,12 +11,15 @@ const {
 router.post("/api/auth/register", async (req, res) => {
   const restaurantDetails = req.body;
   const {
-    restaurant_email,
+    restaurant_name,
+      restaurant_email,
+      address_id,
+      type_of_dishes,
+      delivery_type,
     description,
     opens_at,
     closes_at,
     cuisine_type,
-    delivery_type,
     phone_number,
     delivery_fee,
     rating,
@@ -37,13 +40,15 @@ router.post("/api/auth/register", async (req, res) => {
 
 
       const createRes = await createRestaurant(
-      
-        restaurant_email,
+      restaurant_name,
+      restaurant_email,
+      address_id,
+      type_of_dishes,
+      delivery_type,
     description,
     opens_at,
     closes_at,
     cuisine_type,
-    delivery_type,
     phone_number,
     delivery_fee,
     rating,
