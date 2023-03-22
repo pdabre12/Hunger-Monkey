@@ -15,13 +15,17 @@ const Menu = sequelize.define("menus", {
         type: DT.STRING(60),
         allowNull:false
 },
+dish_name:{
+  type:DT.STRING(50),
+  allowNull:false
+},
   description: {
     type: DT.STRING(100),
     allowNull: false,
   },
   rating: {
     type: DT.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   price: {
     type: DT.INTEGER,
@@ -33,6 +37,10 @@ const Menu = sequelize.define("menus", {
   },
   cuisine:{
     type:DT.STRING(50),
+    allowNull:false
+  },
+  food_type:{
+    type:DT.STRING(20),
     allowNull:false
   }
  

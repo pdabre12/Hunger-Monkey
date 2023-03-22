@@ -17,7 +17,8 @@ cuisine_type,
 phone_number,
 delivery_fee,
 rating,
-password
+password,
+restaurant_dp
 ) => {
   try {
     console.log(restaurant_name)
@@ -34,7 +35,8 @@ password
     phone_number,
     delivery_fee,
     rating,
-    password
+    password,
+    restaurant_dp
     });
     const token = jwt.sign(
         { restaurant_email },

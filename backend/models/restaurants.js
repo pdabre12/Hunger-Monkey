@@ -62,6 +62,10 @@ const Restaurant = sequelize.define(
       type:DT.INTEGER,
       allowNull:true
       
+    },
+    restaurant_dp:{
+      type:DT.STRING(100),
+      allowNull:false
     }
   },
   {

@@ -8,23 +8,26 @@ const router = express.Router();
 router.post("/create", async (req, res) => {
     const menuDetails = req.body;
     const {
-         
+  dish_name,      
   restaurant_email,
   description,
   rating,
   price,
   availability,
-  cuisine
+  cuisine,
+  food_type
     } = menuDetails;
     try {
   const createRes = await createMenu(
         
-    restaurant_email,
-    description,
-    rating,
-    price,
-    availability
-    ,cuisine
+    dish_name,      
+  restaurant_email,
+  description,
+  rating,
+  price,
+  availability,
+  cuisine,
+  food_type
         );
         if (createRes.statusCode === 201) {
       
