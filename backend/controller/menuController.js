@@ -5,22 +5,26 @@ const {Menu} = require("../models/menu");
 const createMenu = async (
  
   
+  dish_name,      
   restaurant_email,
   description,
   rating,
   price,
   availability,
-  cuisine
+  cuisine,
+  food_type
   
 ) => {
   try {
     const menuObject = await Menu.create({
-        restaurant_email,
-        description,
-        rating,
-        price,
-        availability,
-        cuisine
+      dish_name,      
+      restaurant_email,
+      description,
+      rating,
+      price,
+      availability,
+      cuisine,
+      food_type
         
     });
     return {

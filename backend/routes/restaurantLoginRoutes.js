@@ -23,7 +23,8 @@ router.post("/api/auth/register", async (req, res) => {
     phone_number,
     delivery_fee,
     rating,
-    password
+    password,
+    restaurant_dp
   } = restaurantDetails;
   try {
    
@@ -52,7 +53,8 @@ router.post("/api/auth/register", async (req, res) => {
     phone_number,
     delivery_fee,
     rating,
-    password
+    password,
+    restaurant_dp
       );
       if (createRes.statusCode === 201) {
     
