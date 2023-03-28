@@ -12,7 +12,8 @@ const createMenu = async (
   price,
   availability,
   cuisine,
-  food_type
+  food_type,
+  menu_dp
   
 ) => {
   try {
@@ -24,7 +25,8 @@ const createMenu = async (
       price,
       availability,
       cuisine,
-      food_type
+      food_type,
+      menu_dp
         
     });
     return {

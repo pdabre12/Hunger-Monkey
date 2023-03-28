@@ -47,9 +47,26 @@ const Restaurant = sequelize.define(
         allowNull: false,
 
     },
-    address_id:{
-      type: Sequelize.INTEGER,
-  },
+    street: {
+      type: DT.STRING(100),
+      allowNull: false,
+    },
+    city: {
+      type: DT.STRING(50),
+      allowNull: false,
+    },
+    state: {
+      type: DT.STRING(50),
+      allowNull: false,
+    },
+    country:{
+      type: DT.STRING(50),
+      allowNull:false
+    },
+    pincode :{
+      type:DT.INTEGER,
+      allowNull:false
+    },
     password: {
         type: DT.STRING(200),
         allowNull: false,

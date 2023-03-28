@@ -42,6 +42,10 @@ dish_name:{
   food_type:{
     type:DT.STRING(20),
     allowNull:false
+  },
+  menu_dp:{
+    type:DT.STRING(100),
+    allowNull:false
   }
  
 })
