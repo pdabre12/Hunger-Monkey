@@ -24,7 +24,12 @@ router.post("/api/auth/register", async (req, res) => {
     delivery_fee,
     rating,
     password,
-    restaurant_dp
+    restaurant_dp,
+    street,
+    city,
+    state,
+    country,
+    pincode,
   } = restaurantDetails;
   try {
    
@@ -54,7 +59,12 @@ router.post("/api/auth/register", async (req, res) => {
     delivery_fee,
     rating,
     password,
-    restaurant_dp
+    restaurant_dp,
+    street,
+    city,
+    state,
+    country,
+    pincode 
       );
       if (createRes.statusCode === 201) {
     

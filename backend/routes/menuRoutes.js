@@ -16,6 +16,7 @@ router.post("/create", async (req, res) => {
   availability,
   cuisine,
   food_type
+  ,menu_dp
     } = menuDetails;
     try {
   const createRes = await createMenu(
@@ -27,7 +28,8 @@ router.post("/create", async (req, res) => {
   price,
   availability,
   cuisine,
-  food_type
+  food_type,
+  menu_dp
         );
         if (createRes.statusCode === 201) {
       
