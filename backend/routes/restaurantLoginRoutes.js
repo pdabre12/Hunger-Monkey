@@ -29,7 +29,7 @@ router.post("/api/auth/register", async (req, res) => {
     city,
     state,
     country,
-    pincode
+    pincode,
   } = restaurantDetails;
   try {
    
