@@ -15,6 +15,9 @@ const createUser = async (
   password,
   user_gender,
   role,
+  address,
+  city,
+  zipcode
   
 ) => {
   try {
@@ -26,6 +29,9 @@ const createUser = async (
       password,
       user_gender,
       role,
+      address,
+    city,
+    zipcode
 
     }
     const userObject = await User.create(userCredentials);
@@ -53,7 +59,9 @@ const createUser = async (
 
 const getUser = async (email) => {
   try {
-    const userObject = await User.findByPk(email);
+    const userObject = await User.findOne({
+      where: { user_email: email }
+    });
     if (userObject !== undefined && userObject !== null) {
       return {
         statusCode: 200,
@@ -62,7 +70,6 @@ const getUser = async (email) => {
     }
     return {
       statusCode: 404,
-      body: "UserID Not present",
     };
   } catch (err) {
     return {
@@ -106,12 +113,13 @@ const getUserByCreds = async (email) => {
   }
 };
 
-const updateUser = async (userID, updateData) => {
+const updateUser = async (email, updateData) => {
   try {
-    updateData.password = bcrypt.hashSync(updateData.password,salt);
+    // console.log(updateData.password);
+    // updateData.password = bcrypt.hashSync(updateData.password,salt);
     console.log(updateData);
     const updateObject = await User.update(updateData, {
-      where: { id: userID },
+      where: { user_email: email },
       
     });
     if (updateObject !== undefined && updateObject !== null) {

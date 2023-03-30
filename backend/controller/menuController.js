@@ -52,7 +52,7 @@ const getMenu = async (menu_id) => {
       };
     }
     return {
-      statusCode: 404,
+      statusCode: 400,
       body: "Menu Not found",
     };
   } catch (err) {
@@ -77,7 +77,7 @@ const getAllMenusByCreds = async (restaurant_email) => {
       };
     } else {
       return {
-        statusCode: 404,
+        statusCode: 400,
         body: "You do not have any menus available.Please add a menu.",
       };
     }

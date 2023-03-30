@@ -43,12 +43,12 @@ router.get("/:user_id", async (req, res) => {
     }
   });
   
-  router.put("/:userId", async (req, res) => {
+  router.patch("/:user_email", async (req, res) => {
     const updateData = req.body;
-    const user_id = req.params.userId;
+    const user_email = req.params.user_email;
     try {
-      const updateRes = await updateUser(user_id, updateData);
-      const userObject = await getUser(user_id) 
+      const updateRes = await updateUser(user_email, updateData);
+      const userObject = await getUser(user_email) 
       if (updateRes.statusCode === 200 && userObject.statusCode === 200) {
 
         res.status(200).send({

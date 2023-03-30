@@ -39,7 +39,20 @@ const User = sequelize.define(
     role:{
       type:DT.STRING(20),
       allowNull:true
-    }
+    },
+    
+  address: {
+    type: DT.STRING(100),
+    allowNull: false,
+  },
+  city: {
+    type: DT.STRING(50),
+    allowNull: false,
+  },
+  zipcode :{
+    type:DT.INTEGER,
+    allowNull:false
+  }
   },
   {
     hooks: {

@@ -19,6 +19,9 @@ router.post("/api/auth/register", async (req, res) => {
   password,
   user_gender,
   role,
+  address,
+  city,
+  zipcode
   } = userDetails;
   try {
    
@@ -43,6 +46,9 @@ router.post("/api/auth/register", async (req, res) => {
         password,
         user_gender,
         role,
+        address,
+  city,
+  zipcode
       );
       if (createRes.statusCode === 201) {
     
