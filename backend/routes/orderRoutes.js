@@ -1,6 +1,6 @@
 const express = require("express");
 const { getAllOrdersByCredsDeliveryPerson,getAllOrdersByCredsRestaurant, getAllOrdersByCredsUser,
-getOrder,updateOrder,deleteOrder, createOrder } = require("../controller/orderController");
+getOrder,updateOrder,deleteOrder, createOrder, getAllOrders } = require("../controller/orderController");
 const router = express.Router();
 
 
@@ -11,26 +11,28 @@ router.post("/create", async (req, res) => {
          
       restaurant_email,
       email,
-      deliveryPerson_email,
+      // deliveryPerson_email,
       status,
       price,
       placed_order_time,
-      order_delivered_time,
+      // order_delivered_time,
       ordered_menu_items,
-      delivery_address_id
+      delivery_address,
+      restaurant_address
     } = orderDetails;
     try {
   const createRes = await createOrder(
         
     restaurant_email,
   email,
-  deliveryPerson_email,
+  // deliveryPerson_email,
   status,
   price,
   placed_order_time,
-  order_delivered_time,
+  // order_delivered_time,
   ordered_menu_items,
-  delivery_address_id
+  delivery_address,
+  restaurant_address
         );
         if (createRes.statusCode === 201) {
       
@@ -57,7 +59,7 @@ router.post("/create", async (req, res) => {
     }
   });
 
-router.get("/:order_id", async (req, res) => {
+router.get("/get-order/:order_ids", async (req, res) => {
     const id = req.params.order_id;
     console.log(id)
     try {
@@ -220,6 +222,47 @@ router.get("/:order_id", async (req, res) => {
             })
             
         }})
+
+        router.get("/all-orders/", async (req, res) => {
+
+          try {
+            const orders = await getAllOrders();
+            if (orders.statusCode === 200) {
+              res.status(200).send({
+                  orders: orders.body,
+              });
+            } else {
+              res.status(orders.statusCode).send({
+                message: orders.body,
+              });
+            }
+          } catch (err) {
+            console.log("Error encountered while searching orders: ", err);
+            res.status(500).send({
+              errors: {
+                message: "Internal Server Error",
+              },
+            });
+          }
+        });
+
+
+
+
+
+        // router.get("/all-orders/restaurants/:restaurant_email/new",async (req,res)=>{
+        //   try {
+            
+        //   } catch (err) {
+        //     console.log("Unable to delete order item.",err)
+        //     res.status(500).send({
+        //         errors:{
+        //             message:"Internal server error"
+        //         }
+        //     })
+            
+        //   }
+        // })
   
 
 module.exports = router;

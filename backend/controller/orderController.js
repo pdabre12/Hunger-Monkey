@@ -1,31 +1,30 @@
 
 const {Orders} = require("../models/orders");
+const {Op} = require("sequelize");
 
 const createOrder = async (
  
   
   restaurant_email,
   email,
-  deliveryPerson_email,
   status,
   price,
   placed_order_time,
-  order_delivered_time,
   ordered_menu_items,
-  delivery_address_id
+  delivery_address,
+  restaurant_address
   
 ) => {
   try {
     const orderObject = await Orders.create({
       restaurant_email,
       email,
-      deliveryPerson_email,
       status,
       price,
       placed_order_time,
-      order_delivered_time,
       ordered_menu_items,
-      delivery_address_id
+      delivery_address,
+      restaurant_address
         
     });
     return {
@@ -53,6 +52,33 @@ const getOrder = async (order_id) => {
     return {
       statusCode: 404,
       body: "Order Not found",
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: err,
+    };
+  }
+};
+
+const getAllOrders = async () => {
+  try {
+    const orderObject = await Orders.findAll({
+      where:{
+        status:{
+          [Op.or]: ["Pickup Ready", "Preparing","Cancelled","Placed"]
+        }
+      }
+    });
+    if (orderObject !== undefined && orderObject !== null) {
+      return {
+        statusCode: 200,
+        body: orderObject,
+      };
+    }
+    return {
+      statusCode: 404,
+      body: "Orders Not found",
     };
   } catch (err) {
     return {
@@ -198,5 +224,6 @@ module.exports = {
   getAllOrdersByCredsUser,
   updateOrder,
   deleteOrder,
-  getOrder
+  getOrder,
+  getAllOrders
 };

@@ -1,16 +1,15 @@
 const express = require("express");
-const { getRestaurant, getAllRestaurants, updateRestaurant } = require("../controller/restaurantsController");
+const { getRestaurant, getAllRestaurants, updateRestaurant, getRestaurantByCreds } = require("../controller/restaurantsController");
 const router = express.Router();
 
 
 
 
 
-router.get("/:restaurant_id", async (req, res) => {
-    const id = req.params.restaurant_id;
-    console.log(id)
+router.get("/:email", async (req, res) => {
+    const restaurant_email = req.params.email;
     try {
-      const restaurantDetails = await getRestaurant(id);
+      const restaurantDetails = await getRestaurantByCreds(restaurant_email);
       if (restaurantDetails.statusCode === 200) {
         res.status(200).send({
           data: {

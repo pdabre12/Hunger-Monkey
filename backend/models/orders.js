@@ -23,7 +23,7 @@ const Orders = sequelize.define("orders", {
   },
   deliveryPerson_email: {
     type: DT.STRING(50),
-        allowNull:false
+        allowNull:true
   },
   status: {
     type: DT.STRING(50),
@@ -38,21 +38,24 @@ const Orders = sequelize.define("orders", {
     allowNull:false
   },
   order_delivered_time:{
-    type: DT.TIME,
-    allowNull:false
+    type: DT.TIME
   },
   ordered_menu_items:{
     type:DT.JSON,
     allowNull:false
   },
-  delivery_address_id : {
-        type: DT.INTEGER,
+  delivery_address : {
+        type: DT.STRING(100),
         allowNull:false
       
+     },
+     restaurant_address:{
+      type: DT.STRING(100),
+        allowNull:false
      }
 })
 
-Orders.sync();
+Orders.sync({alter:true});
 
 module.exports = {
   Orders,
