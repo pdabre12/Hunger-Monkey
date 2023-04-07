@@ -66,7 +66,7 @@ const getAllOrders = async () => {
     const orderObject = await Orders.findAll({
       where:{
         status:{
-          [Op.or]: ["Pickup Ready", "Preparing","Cancelled","Placed"]
+          [Op.or]: ["Pickup Ready"]
         }
       }
     });
