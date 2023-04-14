@@ -28,8 +28,8 @@ router.post('/create-checkout-session', async (req, res) => {
       line_items,
       mode: 'payment',
       metadata:{order_id:req.body.order_id},
-      success_url: 'http://localhost:3000/userdash/myorders',
-      cancel_url: 'http://localhost:3000/userdash/cart',
+      success_url: 'http://localhost:3000/successcheckout',
+      cancel_url: 'http://localhost:3000/cancelcheckout',
     });
 
 
