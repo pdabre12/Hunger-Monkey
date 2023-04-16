@@ -37,6 +37,19 @@ router.post('/create-checkout-session', async (req, res) => {
     res.send({url:session.url});
   });
 
+  router.post("/refunds",async (req,res)=>{
+    try{
+    const refund = await stripe.refunds.create({
+        payment_intent: req.body.paymentId,
+      });
+      res.status(200).send({refund})
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+  })
+
+
 
   router.post('/webhook', async (request, response) => {
     const sig = request.headers['stripe-signature'];
@@ -61,7 +74,8 @@ router.post('/create-checkout-session', async (req, res) => {
       );
       console.log(sessionData)
       // Fulfill the purchase...
-      const updateRes = await updateOrder(sessionData.metadata.order_id, {"status":"Placed"});
+      const updateRes = await updateOrder(sessionData.metadata.order_id, {"status":"Placed","stripe_paymentIntent_id": 
+      sessionData.payment_intent});
       console.log(updateRes)
     }
 
