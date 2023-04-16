@@ -52,6 +52,11 @@ const Orders = sequelize.define("orders", {
      restaurant_address:{
       type: DT.STRING(100),
         allowNull:false
+     },
+     stripe_paymentIntent_id:{
+      type:DT.STRING(200),
+      allowNull:true
+
      }
 })
 
