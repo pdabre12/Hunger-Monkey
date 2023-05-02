@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
       `?origins=${req.query.origins}` +
       `&destinations=${req.query.destinations}` +
       `&departure_time=${req.query.departure_time}` +
-      `&key=AIzaSyCaR2W_KsJlRo59ohQJMo34-Wm1rxbAsp4`;
+      `&key=AIzaSyBsHMvydHbPzCDdvqV-hhGfo3haF43q8LQ`;
   
     fetch(url)
       .then(response => response.json())

@@ -13,23 +13,17 @@ router.post("/api/auth/register", async (req, res) => {
   const {
     restaurant_name,
       restaurant_email,
-      address_id,
       type_of_dishes,
       delivery_type,
     description,
-    opens_at,
-    closes_at,
     cuisine_type,
     phone_number,
-    delivery_fee,
     rating,
     password,
     restaurant_dp,
     street,
     city,
-    state,
-    country,
-    pincode,
+    zipcode,
   } = restaurantDetails;
   try {
    
@@ -46,25 +40,19 @@ router.post("/api/auth/register", async (req, res) => {
 
 
       const createRes = await createRestaurant(
-      restaurant_name,
-      restaurant_email,
-      address_id,
-      type_of_dishes,
-      delivery_type,
-    description,
-    opens_at,
-    closes_at,
-    cuisine_type,
-    phone_number,
-    delivery_fee,
-    rating,
-    password,
-    restaurant_dp,
-    street,
-    city,
-    state,
-    country,
-    pincode 
+        restaurant_name,
+        restaurant_email,
+        type_of_dishes,
+        delivery_type,
+      description,
+      cuisine_type,
+      phone_number,
+      rating,
+      password,
+      restaurant_dp,
+      street,
+      city,
+      zipcode,
       );
       if (createRes.statusCode === 201) {
     
