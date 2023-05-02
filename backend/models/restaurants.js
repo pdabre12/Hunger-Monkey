@@ -21,14 +21,14 @@ const Restaurant = sequelize.define(
         allowNull: false,
         primary_key:true
       },
-    opens_at: {
-      type: DT.TIME,
-      allowNull: false,
-    },
-    closes_at: {
-      type: DT.TIME,
-      allowNull: false,
-    },
+    // opens_at: {
+    //   type: DT.TIME,
+    //   allowNull: false,
+    // },
+    // closes_at: {
+    //   type: DT.TIME,
+    //   allowNull: false,
+    // },
     cuisine_type: {
       type: DT.STRING(200),
       allowNull: false,
@@ -42,11 +42,11 @@ const Restaurant = sequelize.define(
         type: DT.INTEGER,
         allowNull: false,
     },
-    delivery_fee :{
-        type:DT.INTEGER,
-        allowNull: false,
+    // delivery_fee :{
+    //     type:DT.INTEGER,
+    //     allowNull: false,
 
-    },
+    // },
     street: {
       type: DT.STRING(100),
       allowNull: false,
@@ -55,15 +55,15 @@ const Restaurant = sequelize.define(
       type: DT.STRING(50),
       allowNull: false,
     },
-    state: {
-      type: DT.STRING(50),
-      allowNull: false,
-    },
-    country:{
-      type: DT.STRING(50),
-      allowNull:false
-    },
-    pincode :{
+    // state: {
+    //   type: DT.STRING(50),
+    //   allowNull: false,
+    // },
+    // country:{
+    //   type: DT.STRING(50),
+    //   allowNull:false
+    // },
+    zipcode :{
       type:DT.INTEGER,
       allowNull:false
     },
@@ -94,7 +94,7 @@ const Restaurant = sequelize.define(
     }}
 );
 
-Restaurant.sync();
+Restaurant.sync({alter:true});
 
 module.exports = {
   Restaurant,
