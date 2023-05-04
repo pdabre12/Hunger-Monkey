@@ -1,0 +1,87 @@
+body {
+  padding-top: 56px;
+  
+  
+}
+.landing{
+  background-image: url("donut3.jpg");
+ 
+}
+.navbar-inner {
+  background: white;
+  
+
+}
+.navcontainer{
+  align:left;
+  margin: 0px;
+}
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;..");
+}
+.search-form {
+  border-radius: 30px 0px 0px 30px;
+ }
+ .location-form {
+  border-radius: 30px 30px 30px 30px;
+ }
+.search-btn {
+  border-radius: 0px 30px 30px 0px;
+ 
+}
+.btn-toggler{
+  border-radius: 30px 30px 30px 30px;
+  background: transparent;
+  color:black
+}
+.radio_label{
+  border-radius:15px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background: white;
+  color: black;
+  margin: 0px;
+  
+  cursor: pointer;
+}
+.radio_anchor{
+  
+  border-radius:15px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background: white;
+  color: black;
+  margin: 0px;
+  
+  cursor: pointer;
+}
+.mainradio{
+  display: inline-flex;
+  overflow: hidden;
+  border-radius:15px; 
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25)
+}
+.radio_button{
+  display: none;
+  
+}
+.radio_button:checked+.radio_label{
+  background: black;
+  color: white;
+}.radio_button:checked+.radio_anchor{
+  background: black;
+  color: white;
+}
+.brand{
+  margin-right:50px; 
+}
+.whitetext{
+  color: white;
+}
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item{
+  font-size: x-large;
+}
+.pro-sidebar > .pro-sidebar-inner{
+  margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}

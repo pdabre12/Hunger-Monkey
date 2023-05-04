@@ -32,7 +32,7 @@ dish_name:{
     allowNull: false,
   },
   availability:{
-    type: DT.BOOLEAN,
+    type: DT.STRING(20),
     allowNull:false
   },
   cuisine:{
