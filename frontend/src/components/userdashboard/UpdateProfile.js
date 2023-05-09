@@ -43,7 +43,7 @@ const UpdateProfile = () => {
   //     update(data)
   console.log(data)
 
-  axios.patch(`http://localhost:8000/profile/${localStorage.getItem("user")}`,{
+  axios.patch(process.env.REACT_APP_BACKEND+`profile/${localStorage.getItem("user")}`,{
      ...data
   })
   .then(res=>{
@@ -71,7 +71,7 @@ const UpdateProfile = () => {
             
            let tok =localStorage.getItem("token")
          axios.defaults.headers.common['authorization'] = tok;
-         axios.get(`http://localhost:8000/profile/${localStorage.getItem('user')}`).then(response=>{
+         axios.get(process.env.REACT_APP_BACKEND+`profile/${localStorage.getItem('user')}`).then(response=>{
             
             if(response.status === 200)
             {

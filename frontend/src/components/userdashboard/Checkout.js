@@ -43,7 +43,7 @@ const Checkout = () => {
 
      
     
-      axios.get(`http://localhost:8000/profile/${localStorage.getItem("user")}`)
+      axios.get(process.env.REACT_APP_BACKEND+`profile/${localStorage.getItem("user")}`)
         .then(response=>{
                
                setaddr(response.data.data.address)               
@@ -54,7 +54,7 @@ const Checkout = () => {
     console.log(err)
    })
 
-   axios.get(`http://localhost:8000/restaurants/${items[0].restaurant_email}`)
+   axios.get(process.env.REACT_APP_BACKEND+`restaurants/${items[0].restaurant_email}`)
    .then(res=>{
     console.log(res.data.data)
     setRestData(res.data.data)
@@ -109,7 +109,7 @@ function emptycart(){
            
         }
             const new_promise = new Promise(async (resolve,reject)=>{
-            axios.post("http://localhost:8000/orders/create",{
+            axios.post(process.env.REACT_APP_BACKEND+"orders/create",{
            ...data
         }).then(response=>{
             localStorage.setItem("order_id",response.data.order.order_id)
@@ -123,7 +123,7 @@ function emptycart(){
        })
        new_promise.then(res=>{
         console.log(res)
-        axios.post("http://localhost:8000/stripe/create-checkout-session",{
+        axios.post(process.env.REACT_APP_BACKEND+"stripe/create-checkout-session",{
             cartItems:items,order_id:res.data.order.order_id
         }).then(res=>{
             console.log(res)

@@ -19,7 +19,7 @@ const Dishes = (props) => {
         console.log("herhehrehrhehrehrehh",location.state)
              var headers = new Headers(); 
   
-            axios.get(`http://localhost:8000/menus/all-menus/${location.state.resto.restaurant_email}`)
+            axios.get(process.env.REACT_APP_BACKEND+`menus/all-menus/${location.state.resto.restaurant_email}`)
             .then(response=>{
     
                 console.log("here are your dishes",response.data.menus)

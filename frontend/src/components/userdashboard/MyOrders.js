@@ -24,7 +24,7 @@ const Current_Orders = (props) => {
     const dispatch=useDispatch()
     useEffect(()=>{
         
-             axios.get(`http://localhost:8000/orders/all-orders/users/${localStorage.getItem('user')}`)
+             axios.get(process.env.REACT_APP_BACKEND+`orders/all-orders/users/${localStorage.getItem('user')}`)
              .then(response=>{
             console.log("here are your orders",response.data.orders)
             setorders(response.data.orders)

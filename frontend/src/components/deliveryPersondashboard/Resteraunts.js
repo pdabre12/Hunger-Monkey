@@ -171,7 +171,7 @@ let redirectVar=null
     var headers = new Headers(); 
    
         
-        axios.get("http://localhost:8000/restaurants/").then(response=>{
+        axios.get(process.env.REACT_APP_BACKEND+"restaurants/").then(response=>{
                 if(response.status === 200)
                 {
                     console.log("here is the response-------------->",response)

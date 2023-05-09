@@ -10,7 +10,7 @@ const CancelCheckout = () =>{
 
         
         if(localStorage.getItem("order_id")){
-            axios.delete(`http://localhost:8000/orders/${localStorage.getItem("order_id")}`,{
+            axios.delete(process.env.REACT_APP_BACKEND+`orders/${localStorage.getItem("order_id")}`,{
             }).then(response=>{
                             console.log("updated",response.data)
                 }).catch(err=>{

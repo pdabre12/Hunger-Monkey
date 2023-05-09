@@ -40,7 +40,7 @@ const LoginForm = () => {
             upassword : upwd,
            
         }
-        axios.post("http://localhost:8000/user/api/auth/login",{
+        axios.post(process.env.REACT_APP_BACKEND+"user/api/auth/login",{
                 email:data.email,
                 password:data.upassword
 

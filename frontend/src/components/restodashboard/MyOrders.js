@@ -26,7 +26,7 @@ const Current_Orders = (props) => {
     useEffect(()=>{
       
         
-           axios.get(`http://localhost:8000/orders/all-orders/restaurants/${localStorage.getItem('resto')}`)
+           axios.get(process.env.REACT_APP_BACKEND+`orders/all-orders/restaurants/${localStorage.getItem('resto')}`)
            .then(response=>{
 
             console.log("here are your orders",response.data.orders)
