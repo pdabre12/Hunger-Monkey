@@ -7,7 +7,6 @@ import {selectuser} from '../../features/user_slice'
 import {generatePath, Redirect} from 'react-router';
 import countrieslist from './countries';
 import {insert_customer} from '../mutation_queries'
-import {gql} from 'apollo-boost'
 import { useHistory } from 'react-router';
 const SignupForm = () => {
 

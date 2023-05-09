@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const fetch = require("node-fetch")
 const port = 8000;
 const cors = require('cors');
 
