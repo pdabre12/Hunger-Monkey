@@ -15,7 +15,7 @@ const NewOrderCard = (props) => {
         console.log(data)
 
         console.log("here is the order",props.order)
-        axios.put(`http://localhost:8000/orders/${props.order.order_id}`,{
+        axios.put(process.env.REACT_APP_BACKEND+`orders/${props.order.order_id}`,{
 ...data
 
         }).then(response=>{

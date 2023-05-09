@@ -44,7 +44,7 @@ const UpdateDish = (props) => {
         //   }
         //   update_dish(data)
 
-        axios.put(`http://localhost:8000/menus/${props.location.state.resto.menu_id}`,{
+        axios.put(process.env.REACT_APP_BACKEND+`menus/${props.location.state.resto.menu_id}`,{
             ...data
         })
             .then(response=>{

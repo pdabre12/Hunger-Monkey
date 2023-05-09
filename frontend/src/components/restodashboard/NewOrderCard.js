@@ -20,7 +20,7 @@ const dispatch= useDispatch()
         console.log(data)
 
         console.log("here is the order",props.order)
-        axios.put(`http://localhost:8000/orders/${props.order.order_id}`,{
+        axios.put(process.env.REACT_APP_BACKEND+`orders/${props.order.order_id}`,{
 ...data
 
         }).then(response=>{
@@ -35,12 +35,12 @@ const dispatch= useDispatch()
 
     function refundOrder(e){
       
-        axios.post("http://localhost:8000/stripe/refunds",{
+        axios.post(process.env.REACT_APP_BACKEND+"stripe/refunds",{
             paymentId: props.order.stripe_paymentIntent_id,
            
         })
         .then((res)=>{
-            axios.put(`http://localhost:8000/orders/${props.order.order_id}`,{
+            axios.put(process.env.REACT_APP_BACKEND+`orders/${props.order.order_id}`,{
                 "status":"Refunded"
             })
             document.location.reload()

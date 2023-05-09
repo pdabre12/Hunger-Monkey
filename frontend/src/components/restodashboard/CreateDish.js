@@ -58,7 +58,7 @@ const CreateDish = () => {
             
         }
         console.log("here is your data",data)
-        axios.post("http://localhost:8000/menus/create",{
+        axios.post(process.env.REACT_APP_BACKEND+"menus/create",{
          ...data
 
 

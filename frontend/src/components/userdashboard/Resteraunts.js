@@ -104,7 +104,7 @@ const Resteraunts = (props) => {
     }
 
     function calculateDistance(destinationString){
-        const apiUrl = 'http://localhost:8000/distance/';
+        const apiUrl = process.env.REACT_APP_BACKEND+'distance/';
         var currentLocationString = "" ;
         const myPromise = new Promise((resolve,reject)=>{
         navigator.geolocation.getCurrentPosition((position)=>{
@@ -220,7 +220,7 @@ const responsive = {
     var headers = new Headers(); 
    
     
-        axios.get("http://localhost:8000/restaurants/").then(response=>{
+        axios.get(process.env.REACT_APP_BACKEND+"restaurants/").then(response=>{
                 if(response.status === 200)
                 {
                     console.log("here is the response-------------->",response)

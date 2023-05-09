@@ -75,7 +75,7 @@ const DeliveryPersonSignUp = () => {
         
         }
         console.log(data);
-      axios.post("http://127.0.0.1:8000/user/api/auth/register",{
+      axios.post(process.env.REACT_APP_BACKEND+"user/api/auth/register",{
                 ...data
                   // userdp:"https://ubereatscustomerimagesbucket.s3.amazonaws.com/sathesaurabh97.png",
                 

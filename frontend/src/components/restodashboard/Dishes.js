@@ -19,7 +19,7 @@ const Resteraunts = () => {
     const [updated,setupdated]=useState(false)
     function handleDelete(e){
         e.preventDefault();
-        axios.delete(`http://localhost:8000/menus/${e.currentTarget.value}`)
+        axios.delete(process.env.REACT_APP_BACKEND+`menus/${e.currentTarget.value}`)
         .then(res=>{
             console.log(res.data)
             if(res.status===200){
@@ -38,7 +38,7 @@ const Resteraunts = () => {
         console.log("herhehrehrhehrehrehh")
              var headers = new Headers(); 
            
-            axios.get(`http://localhost:8000/menus/all-menus/${localStorage.getItem('resto')}`)
+            axios.get(process.env.REACT_APP_BACKEND+`menus/all-menus/${localStorage.getItem('resto')}`)
             .then(response=>{
 
             console.log("here are your dishes",response)

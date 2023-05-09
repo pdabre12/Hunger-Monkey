@@ -142,7 +142,7 @@ const RestoSignup = () => {
       //  })
 
       console.log("creating restaurant data row now...")
-      axios.post("http://localhost:8000/restaurants/api/auth/register",
+      axios.post(process.env.REACT_APP_BACKEND+"restaurants/api/auth/register",
                {
                   ...restaurant_data
                }
