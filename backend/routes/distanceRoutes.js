@@ -1,6 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
+const fetch = require('node-fetch');
 
 router.get('/', (req, res) => {
     const url = 'https://maps.googleapis.com/maps/api/distancematrix/json' +

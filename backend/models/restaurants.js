@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize = require("./configSequelize");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const salt = 10;
 
 const DT = Sequelize.DataTypes;

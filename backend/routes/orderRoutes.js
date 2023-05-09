@@ -59,7 +59,7 @@ router.post("/create", async (req, res) => {
     }
   });
 
-router.get("/get-order/:order_ids", async (req, res) => {
+router.get("/get-order/:order_id", async (req, res) => {
     const id = req.params.order_id;
     console.log(id)
     try {

@@ -3,7 +3,6 @@ const { Restaurant } = require("../models/restaurants");
 const {Menu } = require("../models/menu");
 const {Orders} = require("../models/orders");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const salt = 10;
 
 const createUser = async (
