@@ -58,12 +58,12 @@ const RestoCard = (props) => {
             <h4 className="card-title">{props.restaurant_name}</h4>
             <p className="card-text">{props.restaurant_address}</p>
             <p><b style={{color:"black"}}>Zipcode :{props.zipcode}</b></p>
-            <p><b style={{color:"black"}}>{props.resto.description}</b></p>
+            <p><b style={{color:"black"} }>{props.resto.description}</b></p>
             </div>
             <div className="card-footer py-4">
             
             <Link to={{pathname:"/userdash/restoprofile",state:{resto:props.resto}}} ><button type="button" class="btn btn-dark" >View Menu</button></Link>
-            {props.time&&<button type="button" class="btn btn-" disabled style={{float:"right"}} ><b>ETA: </b> {props.time} - {props.time*1.5} mins</button>}
+            {props.time&&<button type="button" class="btn btn-" disabled style={{float:"right"}} ><b>ETA: </b> {props.time*1.5} - {props.time*2} mins</button>}
             {/* <button type="button" class="btn btn-dark" onClick={addToFavourite} >Remove</button> */}
                 </div>
         </div>

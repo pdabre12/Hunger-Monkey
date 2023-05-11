@@ -204,7 +204,7 @@ function emptycart(){
                                           
                                             <td>{item.quantity*item.price}$</td>
                                             <td>{item.restaurant_email}</td>
-                                            <td>{restData?restData.pincode:""}</td>
+                                            <td>{restData?restData.zipcode:""}</td>
                                         
                                   
                                     

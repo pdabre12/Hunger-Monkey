@@ -22,7 +22,7 @@ const RestoCard = (props) => {
             <div className="card-footer py-4">
             
             <Link to={{pathname:"/main/restoProfile",state:{resto:props.resto}}} ><button type="button" class="btn btn-dark"  >View Menu</button></Link>
-            <button type="button" class="btn btn-" disabled style={{float:"right"}} ><b>ETA:</b> {props.time} - {props.time*1.5} mins</button> </div>
+            <button type="button" class="btn btn-" disabled style={{float:"right"}} ><b>ETA:</b> {props.time*1.5} - {props.time*2} mins</button> </div>
         </div>
         </div>
         
