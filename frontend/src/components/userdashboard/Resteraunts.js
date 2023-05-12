@@ -280,8 +280,11 @@ let details_received = restos_received.map((resto,index) => {
 />
     )
 })
-
-let details_recommended_received = recommendedRestos.map((resto,index) => {
+let restos = recommendedRestos;
+console.log("restos",restos)
+restos.sort(() => Math.random() - 0.5);
+    console.log("restosSorted",restos)
+let details_recommended_received = restos.map((resto,index) => {
     
     return(
     <RestoCard
