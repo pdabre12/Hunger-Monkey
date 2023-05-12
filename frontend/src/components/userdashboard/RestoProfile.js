@@ -25,10 +25,13 @@ if(localStorage.getItem("user")==null){
                     <div class="text-center mt-3"> 
                         <h5 class="mt-2 mb-0">{location.state.resto.restaurant_name}</h5>
                         <div class="px-4 mt-1">
-                            <p class="fonts">{location.state.resto.address}
+                            <p class="fonts">{location.state.resto.street}
+                            <br>
+                            </br>
+                            <b>Zipcode:</b>{location.state.resto.zipcode}
                             
-                            Zipcode:{location.state.resto.zipcode}
                              </p>
+                             
                         </div>
                         <div class="buttons"> 
                         &nbsp;&nbsp;&nbsp;<Link to="/userdash"><button type = "btn" className="btn btn-dark btn-xs" >Home</button></Link>

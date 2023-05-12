@@ -56,14 +56,15 @@ const RestoCard = (props) => {
             <img className="card-img-top" style={{width: "100%",height: "10vw"}} src = {props.restdp} alt="Design" />
             <div className="card-body">
             <h4 className="card-title">{props.restaurant_name}</h4>
-            <p className="card-text">{props.restaurant_address}</p>
+            <p className="card-text" style={{whiteSpace:"nowrap"}}>{props.restaurant_address.substr(0,props.restaurant_address.length-9)}</p>
+
             <p><b style={{color:"black"}}>Zipcode :{props.zipcode}</b></p>
-            <p><b style={{color:"black"} }>{props.resto.description}</b></p>
+            <p><b style={{color:"black",whiteSpace:"nowrap"}}>{props.resto.description.slice(0,40)}</b></p>
             </div>
             <div className="card-footer py-4">
             
             <Link to={{pathname:"/userdash/restoprofile",state:{resto:props.resto}}} ><button type="button" class="btn btn-dark" >View Menu</button></Link>
-            {props.time&&<button type="button" class="btn btn-" disabled style={{float:"right"}} ><b>ETA: </b> {props.time*1.5} - {props.time*2} mins</button>}
+            {props.time&&<button type="button" class="btn btn-" disabled style={{float:"right"}} ><b>ETA: </b> {props.time*2} - {props.time*2.5} mins</button>}
             {/* <button type="button" class="btn btn-dark" onClick={addToFavourite} >Remove</button> */}
                 </div>
         </div>
