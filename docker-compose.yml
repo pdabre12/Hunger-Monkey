@@ -2,14 +2,14 @@ version: "2"
 services: 
   frontend:
     image: 'react-frontend'
-    build: frontend/
+    build: frontend
     container_name: react-frontend
     ports:
       - "3000:3000"
 
   backend:
     image: 'nodejs-backend'
-    build: backend/
+    build: backend
     container_name: nodejs-backend
     # depends_on:
     #   - db
