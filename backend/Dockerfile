@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:19.9.0
 # set working directory
 WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
@@ -10,4 +10,4 @@ RUN npm install --silent
 # add app
 COPY . ./
 
-CMD ["nodemon", "index.js"]
+CMD ["node", "index.js"]
