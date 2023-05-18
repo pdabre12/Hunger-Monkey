@@ -131,7 +131,7 @@ fetch(`${apiUrl}?origins=${res}&destinations=${destinationString}&departure_time
         if(localStorage.getItem("restaurant")!=null){
           history.push("/restodash");
         }
-        axios.get(process.env.REACT_APP_BACKEND+"restaurants/").then(response=>{
+        axios.get("http://localhost:8000/"+"restaurants/").then(response=>{
                 console.log("heres my error",response)
                 if(response.status === 200)
                 {
