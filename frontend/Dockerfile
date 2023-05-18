@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:19.9.0
 
 # set working directory
 WORKDIR /app
@@ -8,11 +8,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY package.json ./
+COPY . ./
 COPY package-lock.json ./
 RUN npm install 
 
 # add app
-COPY . ./
+
 
 # start app
 CMD ["npm", "start"]
