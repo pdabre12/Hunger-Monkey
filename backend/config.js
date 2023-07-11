@@ -1,8 +1,8 @@
 const aws = {
-    host: "hungermonkey.cf0nsjqimgq2.us-west-2.rds.amazonaws.com",
-    userName: "admin",
-    password: "hungermonkey",
-    dbName:"fda",
+    host: "xxx",
+    userName: "xx",
+    password: "xx",
+    dbName:"xxx",
   };
   
   module.exports = aws;
